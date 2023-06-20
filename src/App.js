@@ -1,29 +1,32 @@
 import { useState } from 'react';
 import './App.css';
+import { clear } from '@testing-library/user-event/dist/clear';
 
 
 
 function App() {
- 
+
 
   const [hr, setHr] = useState(0);
   const [min, setMin] = useState(0);
   const [sec, setSec] = useState(0);
-  function Timerstart(){
-    setInterval(() => {
+  {
+    const timer = setInterval(() => {
       setSec(sec + 1)
-      if (sec==60) {
+      if (sec === 59) {
         setSec(0);
         setMin(min + 1);
-        if (min==60) {
+        if (min === 59) {
           setMin(0);
-          setHr(hr + 1);
+          setHr(hr+1);
         }
       }
+      clearInterval(timer);
     }, 1000);
+
   }
 
-  
+
 
 
   // const [variable, function] = useState(variable = value) 
@@ -39,12 +42,13 @@ function App() {
       <div className='sec'>
         {sec}
       </div>
-      <div className='button'>
-        <button onClick={Timerstart}> Start</button>
-  
-      </div>
+     
     </div>
 
+
+
   )
+
 }
+
 export default App;
